@@ -1,48 +1,50 @@
-import Image from "next/image";
-import Link from "next/link";
-import "../styles/globals.css";
+import '../styles/globals.css'
+import { Figtree } from 'next/font/google'
 
-export default function RootLayout({
+import Sidebar from '../components/Sidebar'
+import SupabaseProvider from '../providers/SupabaseProvider'
+import UserProvider from '../providers/UserProvider'
+import ModalProvider from '../providers/ModalProvider'
+import ToasterProvider from '../providers/ToasterProvider'
+import getContentsByUserId from '../actions/getContentsByUserId'
+import Player from '../components/Player'
+import getActiveProductsWithPrices from '../actions/getActiveProductsWithPrices'
+
+
+const font = Figtree({ subsets: ['latin'] })
+
+export const metadata = {
+  title: 'Spotify Clone is change for me',
+  description: 'Welcome to Learn',
+}
+
+// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-static'
+export const revalidate = 60
+
+
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const header = (
-    <header>
-      <div className="text-center bg-slate-800 p-8 my-6 rounded-md">
-        <Image
-          src="/logo.png"
-          width={40}
-          height={40}
-          className="mx-auto"
-          alt={"logo"}
-        />
-        <Link href="/">
-          <h1 className="text-2xl text-white font-bold mt-4">Jack's Blog</h1>
-        </Link>
-        <p className="text-slate-300">🤟 Welcome to my tech blog. 💻</p>
-      </div>
-    </header>
-  );
-
-  const footer = (
-    <footer>
-      <div className="border-t border-slate-400 mt-12 py-6 text-center text-slate-400">
-        <h3>Designed by Pixegami</h3>
-      </div>
-    </footer>
-  );
+  const userContents = await getContentsByUserId()
+  const products = await getActiveProductsWithPrices()
 
   return (
-    <html>
-      <head />
-      <body>
-        <div className="mx-auto  max-w-2xl px-6">
-          {header}
-          {children}
-          {footer}
-        </div>
+    <html lang="en">
+      <body className={font.className}>
+        <ToasterProvider />
+        <SupabaseProvider>
+          <UserProvider>
+            <ModalProvider products={products} />
+            <Sidebar contents={userContents}>
+              {children}
+            </Sidebar>
+            <Player />
+          </UserProvider>
+        </SupabaseProvider>
       </body>
     </html>
-  );
+  )
 }
