@@ -1,4 +1,4 @@
-// "use server"
+"use server"
 
 import { Content } from "../types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
