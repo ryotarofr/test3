@@ -5,8 +5,8 @@
 // // import PostPreview from '@/components/PostPreview';
 // // import getPostMetadata from '@/utils/getPostMetadata';
 
-import PostPreview from "../../components/PostPreview";
-import getPostMetadata from "../../components/getPostMetadata";
+import PostPreview from "../components/PostPreview";
+import getPostMetadata from "../components/getPostMetadata";
 
 // export const revalidate = 0;
 
@@ -47,8 +47,6 @@ import getPostMetadata from "../../components/getPostMetadata";
 //   )
 // }
 
-export const revalidate = 0
-export const dynamic = 'force-dynamic';
 
 const HomePage = () => {
   const postMetadata = getPostMetadata();
