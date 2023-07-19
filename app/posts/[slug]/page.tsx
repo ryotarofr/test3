@@ -4,8 +4,8 @@ import matter from "gray-matter";
 import getPostMetadata from "../../../components/getPostMetadata";
 
 // export const revalidate = 0
-// export const dynamic = 'force-dynamic'
-export const dynamic = 'force-static'
+export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-static'
 
 const getPostContent = (slug: string) => {
   const folder = "posts/";

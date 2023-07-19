@@ -9,7 +9,7 @@ import PostPreview from "../components/PostPreview";
 import getPostMetadata from "../components/getPostMetadata";
 
 // export const revalidate = 0;
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 // export default async function Home() {
 //   const contents = await getContents()
